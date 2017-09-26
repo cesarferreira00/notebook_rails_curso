@@ -7,6 +7,8 @@ gem 'rails', '4.2.5'
 gem 'rails-i18n', '~> 4.0.0'
 # A library for generating fake data such as names, addresses, and phone numbers.
 gem 'faker'
+# O Lero-lero Generator é uma ferramenta capaz de gerar frases que 'falam' muita coisa mas que não tem conteúdo algum.
+gem 'lerolero_generator'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets

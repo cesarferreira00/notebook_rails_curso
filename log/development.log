@@ -2092,3 +2092,2196 @@ Processing by ContactsController#edit as HTML
   Rendered contacts/_form.html.erb (26.9ms)
   Rendered contacts/edit.html.erb within layouts/application (31.5ms)
 Completed 200 OK in 76ms (Views: 74.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for ::1 at 2017-09-26 16:51:32 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (986.4ms)
+Completed 200 OK in 1215ms (Views: 1204.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 16:51:37 -0300
+Processing by ContactsController#index as HTML
+  [1m[35mContact Load (0.3ms)[0m  SELECT "contacts".* FROM "contacts"
+  [1m[36mKind Load (0.2ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered contacts/shared/_teste.html.erb (0.3ms)
+  Rendered contacts/index.html.erb within layouts/application (49.8ms)
+Completed 200 OK in 101ms (Views: 82.5ms | ActiveRecord: 1.6ms)
+  [1m[36m (13.0ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.6ms)[0m  select sqlite_version(*)
+  [1m[36m (1.1ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateKinds (20170520172248)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "kinds" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170520172248"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+Migrating to CreateContacts (20170520172628)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "contacts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "kind_id" integer, "rmk" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_contacts_on_kind_id" ON "contacts" ("kind_id")[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20170520172628"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+Migrating to CreateAdresses (20170520172923)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (1.1ms)[0m  [1mCREATE TABLE "adresses" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "street" varchar, "city" varchar, "state" varchar, "contact_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_adresses_on_contact_id" ON "adresses" ("contact_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170520172923"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+Migrating to CreatePhones (20170520173042)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "phones" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "phone" varchar, "contact_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_phones_on_contact_id" ON "phones" ("contact_id")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20170520173042"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_adresses_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_adresses_on_contact_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_contacts_on_kind_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_contacts_on_kind_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_phones_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_phones_on_contact_id' AND type='index'
+[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "kinds" ("description", "created_at", "updated_at") VALUES (?, ?, ?)  [["description", "Amigo"], ["created_at", "2017-09-26 19:52:16.122861"], ["updated_at", "2017-09-26 19:52:16.122861"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "kinds" ("description", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["description", "Contato"], ["created_at", "2017-09-26 19:52:16.125192"], ["updated_at", "2017-09-26 19:52:16.125192"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "kinds" ("description", "created_at", "updated_at") VALUES (?, ?, ?)  [["description", "Comercial"], ["created_at", "2017-09-26 19:52:16.127102"], ["updated_at", "2017-09-26 19:52:16.127102"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mKind Load (0.2ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Srta. Vitor Oliveira"], ["email", "annamae_pacocha@fritsch.com"], ["kind_id", 2], ["rmk", "Est sed repellat accusantium fuga fugit. Reprehenderit autem aspernatur et voluptas sed quia. Quia est amet non dolores saepe qui odit. Reiciendis explicabo eum distinctio delectus beatae. Alias quia eum nostrum occaecati facilis dolor esse."], ["created_at", "2017-09-26 19:52:17.046137"], ["updated_at", "2017-09-26 19:52:17.046137"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35mKind Load (0.1ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Gabriela Corrêa"], ["email", "abigail@jones.com"], ["kind_id", 2], ["rmk", "Iure consequatur et. Impedit tempore asperiores consectetur temporibus architecto laudantium. Facere iusto est ut quidem sed quam sit."], ["created_at", "2017-09-26 19:52:17.049892"], ["updated_at", "2017-09-26 19:52:17.049892"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mKind Load (0.1ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Nataniel Gonçalves"], ["email", "marques@dickens.co"], ["kind_id", 2], ["rmk", "Harum ullam ut maxime consequuntur vero voluptatem. Voluptatem dolore velit dolores. Odio impedit similique quaerat molestiae voluptatem et amet. Velit ex eligendi voluptates et sequi beatae."], ["created_at", "2017-09-26 19:52:17.053045"], ["updated_at", "2017-09-26 19:52:17.053045"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mKind Load (0.1ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Vitor Franco"], ["email", "madyson.feest@boyerheathcote.info"], ["kind_id", 2], ["rmk", "Adipisci quia sunt corrupti sed et. Qui fugit odit sapiente minus. Ea eos non qui accusantium."], ["created_at", "2017-09-26 19:52:17.056039"], ["updated_at", "2017-09-26 19:52:17.056039"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mKind Load (0.1ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Paulo Duarte Neto"], ["email", "avery.robel@bruen.co"], ["kind_id", 3], ["rmk", "Quibusdam quia provident eaque et cum. Earum exercitationem veritatis ut ipsam necessitatibus. Ut praesentium perspiciatis omnis hic. Suscipit voluptatum aliquam deserunt. Aut facere id aut et quod dolor incidunt."], ["created_at", "2017-09-26 19:52:17.059382"], ["updated_at", "2017-09-26 19:52:17.059382"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mKind Load (0.1ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Pedro Braga Neto"], ["email", "marilie.sanford@fahey.com"], ["kind_id", 3], ["rmk", "Et quia quisquam consequatur a dolor. Quae necessitatibus praesentium. Amet nemo ex fugiat. Repudiandae tenetur quo non."], ["created_at", "2017-09-26 19:52:17.062728"], ["updated_at", "2017-09-26 19:52:17.062728"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mKind Load (0.1ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Sra. Larissa Caldeira"], ["email", "jaylin@bednar.biz"], ["kind_id", 1], ["rmk", "Placeat aliquam ipsam ducimus perspiciatis. Facilis dolores doloremque sit. Perferendis quos provident ex. Veniam beatae voluptas minus."], ["created_at", "2017-09-26 19:52:17.065996"], ["updated_at", "2017-09-26 19:52:17.065996"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35mKind Load (0.1ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Daniel Sales"], ["email", "ludie.thompson@huels.name"], ["kind_id", 3], ["rmk", "Ut sit repellat aut. Eos nisi et voluptatem. Molestiae aut alias consequatur ex. Est eveniet tenetur et quae neque animi."], ["created_at", "2017-09-26 19:52:17.070104"], ["updated_at", "2017-09-26 19:52:17.070104"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mKind Load (0.1ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Theo Gomes"], ["email", "yasmeen@hilpert.io"], ["kind_id", 1], ["rmk", "Dolores ex tempore. Error harum dicta ducimus eos dolores natus minima. Velit laboriosam eaque ad."], ["created_at", "2017-09-26 19:52:17.073368"], ["updated_at", "2017-09-26 19:52:17.073368"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mKind Load (0.1ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Dalila Macedo Jr."], ["email", "fanny.homenick@skilescremin.org"], ["kind_id", 2], ["rmk", "Velit natus nisi quidem. Ut laborum voluptatum dolorem nesciunt a cupiditate error. Recusandae ut quo quia molestias."], ["created_at", "2017-09-26 19:52:17.076526"], ["updated_at", "2017-09-26 19:52:17.076526"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mContact Load (0.2ms)[0m  SELECT "contacts".* FROM "contacts"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "adresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["street", "s/n Ponte Rebeca Vieira"], ["city", "Murilo do Norte"], ["state", "PA"], ["contact_id", 1], ["created_at", "2017-09-26 19:52:17.090887"], ["updated_at", "2017-09-26 19:52:17.090887"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "adresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["street", "s/n Ponte Tertuliano"], ["city", "Nova Caio"], ["state", "RN"], ["contact_id", 2], ["created_at", "2017-09-26 19:52:17.095614"], ["updated_at", "2017-09-26 19:52:17.095614"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "adresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["street", "s/n Alameda Paula"], ["city", "Moraes de Nossa Senhora"], ["state", "RR"], ["contact_id", 3], ["created_at", "2017-09-26 19:52:17.098556"], ["updated_at", "2017-09-26 19:52:17.098556"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "adresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["street", "4516 Rua Lorraine Rocha"], ["city", "Velha Larissa do Sul"], ["state", "DF"], ["contact_id", 4], ["created_at", "2017-09-26 19:52:17.101303"], ["updated_at", "2017-09-26 19:52:17.101303"]]
+  [1m[35m (2.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "adresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["street", "2257 Viela Marcela"], ["city", "Vila Clara"], ["state", "CE"], ["contact_id", 5], ["created_at", "2017-09-26 19:52:17.106154"], ["updated_at", "2017-09-26 19:52:17.106154"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "adresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["street", "51795 Ponte Cecília Caldeira"], ["city", "Ambrósio do Sul"], ["state", "SP"], ["contact_id", 6], ["created_at", "2017-09-26 19:52:17.109447"], ["updated_at", "2017-09-26 19:52:17.109447"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "adresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["street", "26520 Marginal Vitor Cardoso"], ["city", "Carlos do Sul"], ["state", "AM"], ["contact_id", 7], ["created_at", "2017-09-26 19:52:17.112255"], ["updated_at", "2017-09-26 19:52:17.112255"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "adresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["street", "413 Rua Marli"], ["city", "Vieira do Descoberto"], ["state", "BA"], ["contact_id", 8], ["created_at", "2017-09-26 19:52:17.115635"], ["updated_at", "2017-09-26 19:52:17.115635"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "adresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["street", "477 Avenida Washington"], ["city", "Felícia do Sul"], ["state", "AL"], ["contact_id", 9], ["created_at", "2017-09-26 19:52:17.119701"], ["updated_at", "2017-09-26 19:52:17.119701"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "adresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["street", "68780 Avenida Isabel Viana"], ["city", "Gomes do Sul"], ["state", "AL"], ["contact_id", 10], ["created_at", "2017-09-26 19:52:17.123301"], ["updated_at", "2017-09-26 19:52:17.123301"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36mContact Load (0.2ms)[0m  [1mSELECT "contacts".* FROM "contacts"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "(98) 40913-9511"], ["contact_id", 1], ["created_at", "2017-09-26 19:52:17.134840"], ["updated_at", "2017-09-26 19:52:17.134840"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "(76) 4863-0630"], ["contact_id", 1], ["created_at", "2017-09-26 19:52:17.138424"], ["updated_at", "2017-09-26 19:52:17.138424"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "(15) 7912-7802"], ["contact_id", 1], ["created_at", "2017-09-26 19:52:17.140848"], ["updated_at", "2017-09-26 19:52:17.140848"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "(99) 8039-7304"], ["contact_id", 2], ["created_at", "2017-09-26 19:52:17.143949"], ["updated_at", "2017-09-26 19:52:17.143949"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "(37) 8228-1737"], ["contact_id", 2], ["created_at", "2017-09-26 19:52:17.147238"], ["updated_at", "2017-09-26 19:52:17.147238"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "(81) 2170-3998"], ["contact_id", 3], ["created_at", "2017-09-26 19:52:17.149526"], ["updated_at", "2017-09-26 19:52:17.149526"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "+55 (32) 1520-6668"], ["contact_id", 4], ["created_at", "2017-09-26 19:52:17.151730"], ["updated_at", "2017-09-26 19:52:17.151730"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "+55 (99) 8357-4589"], ["contact_id", 4], ["created_at", "2017-09-26 19:52:17.154054"], ["updated_at", "2017-09-26 19:52:17.154054"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "(79) 0448-9790"], ["contact_id", 4], ["created_at", "2017-09-26 19:52:17.156825"], ["updated_at", "2017-09-26 19:52:17.156825"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "(13) 26956-8328"], ["contact_id", 5], ["created_at", "2017-09-26 19:52:17.159740"], ["updated_at", "2017-09-26 19:52:17.159740"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "+55 (16) 4220-4849"], ["contact_id", 5], ["created_at", "2017-09-26 19:52:17.161801"], ["updated_at", "2017-09-26 19:52:17.161801"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "+55 (52) 9640-2942"], ["contact_id", 5], ["created_at", "2017-09-26 19:52:17.163764"], ["updated_at", "2017-09-26 19:52:17.163764"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "(73) 9941-6975"], ["contact_id", 5], ["created_at", "2017-09-26 19:52:17.165770"], ["updated_at", "2017-09-26 19:52:17.165770"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "(28) 02715-9714"], ["contact_id", 6], ["created_at", "2017-09-26 19:52:17.167748"], ["updated_at", "2017-09-26 19:52:17.167748"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "+55 (47) 5238-9931"], ["contact_id", 7], ["created_at", "2017-09-26 19:52:17.170547"], ["updated_at", "2017-09-26 19:52:17.170547"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "+55 (91) 5136-0136"], ["contact_id", 7], ["created_at", "2017-09-26 19:52:17.172942"], ["updated_at", "2017-09-26 19:52:17.172942"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "(57) 4099-8976"], ["contact_id", 7], ["created_at", "2017-09-26 19:52:17.174872"], ["updated_at", "2017-09-26 19:52:17.174872"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "+55 (35) 4979-0474"], ["contact_id", 8], ["created_at", "2017-09-26 19:52:17.177011"], ["updated_at", "2017-09-26 19:52:17.177011"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "+55 (28) 8472-2773"], ["contact_id", 8], ["created_at", "2017-09-26 19:52:17.179002"], ["updated_at", "2017-09-26 19:52:17.179002"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "(81) 2420-9048"], ["contact_id", 8], ["created_at", "2017-09-26 19:52:17.181173"], ["updated_at", "2017-09-26 19:52:17.181173"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "(57) 42213-3807"], ["contact_id", 8], ["created_at", "2017-09-26 19:52:17.183418"], ["updated_at", "2017-09-26 19:52:17.183418"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "+55 (72) 7614-5094"], ["contact_id", 8], ["created_at", "2017-09-26 19:52:17.185427"], ["updated_at", "2017-09-26 19:52:17.185427"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "(70) 8936-5637"], ["contact_id", 9], ["created_at", "2017-09-26 19:52:17.187543"], ["updated_at", "2017-09-26 19:52:17.187543"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "(89) 58657-1662"], ["contact_id", 10], ["created_at", "2017-09-26 19:52:17.189642"], ["updated_at", "2017-09-26 19:52:17.189642"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "(25) 7226-5774"], ["contact_id", 10], ["created_at", "2017-09-26 19:52:17.191847"], ["updated_at", "2017-09-26 19:52:17.191847"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 16:52:35 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ContactsController#index as HTML
+  [1m[35mContact Load (0.2ms)[0m  SELECT "contacts".* FROM "contacts"
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered contacts/shared/_teste.html.erb (0.7ms)
+  Rendered contacts/index.html.erb within layouts/application (940.6ms)
+Completed 200 OK in 1189ms (Views: 1172.5ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 16:52:44 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mContact Load (0.3ms)[0m  [1mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36mAdress Load (0.2ms)[0m  [1mSELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1[0m  [["contact_id", 1]]
+  Rendered contacts/_form.html.erb (62.7ms)
+  Rendered contacts/edit.html.erb within layouts/application (64.9ms)
+Completed 200 OK in 144ms (Views: 96.9ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/contacts/5/edit" for ::1 at 2017-09-26 16:53:02 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35mContact Load (0.2ms)[0m  SELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1  [["id", 5]]
+  [1m[36mKind Load (0.3ms)[0m  [1mSELECT "kinds".* FROM "kinds"[0m
+  [1m[35mAdress Load (0.3ms)[0m  SELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1  [["contact_id", 5]]
+  Rendered contacts/_form.html.erb (11.1ms)
+  Rendered contacts/edit.html.erb within layouts/application (14.6ms)
+Completed 200 OK in 83ms (Views: 75.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/contacts/7/edit" for ::1 at 2017-09-26 16:53:15 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mContact Load (0.1ms)[0m  [1mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1[0m  [["id", 7]]
+  [1m[35mKind Load (0.2ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36mAdress Load (0.2ms)[0m  [1mSELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1[0m  [["contact_id", 7]]
+  Rendered contacts/_form.html.erb (16.3ms)
+  Rendered contacts/edit.html.erb within layouts/application (19.2ms)
+Completed 200 OK in 92ms (Views: 76.1ms | ActiveRecord: 0.5ms)
+  [1m[36m (1.2ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (0.9ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateKinds (20170520172248)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "kinds" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170520172248"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+Migrating to CreateContacts (20170520172628)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "contacts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "kind_id" integer, "rmk" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_contacts_on_kind_id" ON "contacts" ("kind_id")[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20170520172628"]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+Migrating to CreateAdresses (20170520172923)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "adresses" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "street" varchar, "city" varchar, "state" varchar, "contact_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.4ms)[0m  CREATE  INDEX "index_adresses_on_contact_id" ON "adresses" ("contact_id")
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170520172923"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+Migrating to CreatePhones (20170520173042)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "phones" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "phone" varchar, "contact_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_phones_on_contact_id" ON "phones" ("contact_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20170520173042"]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_adresses_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_adresses_on_contact_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_contacts_on_kind_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_contacts_on_kind_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_phones_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_phones_on_contact_id' AND type='index'
+[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "kinds" ("description", "created_at", "updated_at") VALUES (?, ?, ?)  [["description", "Amigo"], ["created_at", "2017-09-26 20:00:53.839137"], ["updated_at", "2017-09-26 20:00:53.839137"]]
+  [1m[36m (2.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "kinds" ("description", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["description", "Contato"], ["created_at", "2017-09-26 20:00:53.843847"], ["updated_at", "2017-09-26 20:00:53.843847"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "kinds" ("description", "created_at", "updated_at") VALUES (?, ?, ?)  [["description", "Comercial"], ["created_at", "2017-09-26 20:00:53.847395"], ["updated_at", "2017-09-26 20:00:53.847395"]]
+  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mKind Load (0.2ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Amanda Souza"], ["email", "cruz@sanford.biz"], ["kind_id", 1], ["rmk", "É fundamental ressaltar que a atual estrutura de organização auxilia a preparação e a estruturação dos conceitos de participação geral."], ["created_at", "2017-09-26 20:00:54.906772"], ["updated_at", "2017-09-26 20:00:54.906772"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mKind Load (0.1ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Cauã Veloso"], ["email", "wilfred_graham@von.net"], ["kind_id", 3], ["rmk", "Não podemos esquecer que a complexidade dos estudos efetuados cumpre um papel essencial na formulação das novas proposições."], ["created_at", "2017-09-26 20:00:54.910394"], ["updated_at", "2017-09-26 20:00:54.910394"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35mKind Load (0.1ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "César Albuquerque"], ["email", "kianna.rowe@hayes.org"], ["kind_id", 2], ["rmk", "É fundamental ressaltar que o novo modelo estrutural aqui preconizado assume importantes posições na definição dos conceitos de participação geral."], ["created_at", "2017-09-26 20:00:54.913545"], ["updated_at", "2017-09-26 20:00:54.913545"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35mKind Load (0.1ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "João Albuquerque"], ["email", "eulah@cartwright.name"], ["kind_id", 1], ["rmk", "Caros colegas o desenvolvimento de formas distintas de atuação prejudica a percepção da importância dos conceitos de participação geral."], ["created_at", "2017-09-26 20:00:54.916514"], ["updated_at", "2017-09-26 20:00:54.916514"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mKind Load (0.2ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Isis Ferreira"], ["email", "danial.kunde@blanda.info"], ["kind_id", 1], ["rmk", "O incentivo ao avanço tecnológico, assim como a complexidade dos estudos efetuados auxilia a preparação e a estruturação das nossas metas financeiras e administrativas."], ["created_at", "2017-09-26 20:00:54.920200"], ["updated_at", "2017-09-26 20:00:54.920200"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35mKind Load (0.1ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Lívia Nascimento"], ["email", "piper_vonrueden@watersgerhold.io"], ["kind_id", 1], ["rmk", "Por outro lado, a análise dos diversos resultados prejudica a percepção da importância das nossas opções de desenvolvimento futuro."], ["created_at", "2017-09-26 20:00:54.923599"], ["updated_at", "2017-09-26 20:00:54.923599"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mKind Load (0.1ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Sr. Roberta Duarte"], ["email", "vella.mayer@hane.co"], ["kind_id", 3], ["rmk", "Caros colegas a constante divulgação das informações facilita a definição das atitudes e das atribuições da diretoria."], ["created_at", "2017-09-26 20:00:54.926719"], ["updated_at", "2017-09-26 20:00:54.926719"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mKind Load (0.1ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Matheus Lima"], ["email", "brando@beattyherzog.biz"], ["kind_id", 3], ["rmk", "A experiência mostra que o desenvolvimento de formas distintas de atuação nos obriga à análise das nossas opções de desenvolvimento futuro."], ["created_at", "2017-09-26 20:00:54.930039"], ["updated_at", "2017-09-26 20:00:54.930039"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mKind Load (0.1ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Mariana Dias"], ["email", "karson_aufderhar@marvin.name"], ["kind_id", 3], ["rmk", "A prática mostra que a complexidade dos estudos efetuados cumpre um papel essencial na formulação das novas proposições."], ["created_at", "2017-09-26 20:00:54.933470"], ["updated_at", "2017-09-26 20:00:54.933470"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mKind Load (0.1ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Eduarda Castro"], ["email", "raymond.ritchie@ratke.io"], ["kind_id", 1], ["rmk", "Por outro lado, a execução deste projeto nos obriga à análise das novas proposições."], ["created_at", "2017-09-26 20:00:54.936411"], ["updated_at", "2017-09-26 20:00:54.936411"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mContact Load (0.1ms)[0m  SELECT "contacts".* FROM "contacts"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "adresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["street", "754 Viela Pablo Ramos"], ["city", "Moraes do Descoberto"], ["state", "MT"], ["contact_id", 1], ["created_at", "2017-09-26 20:00:54.951160"], ["updated_at", "2017-09-26 20:00:54.951160"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "adresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["street", "293 Travessa Cecília"], ["city", "Vila Marcela"], ["state", "PA"], ["contact_id", 2], ["created_at", "2017-09-26 20:00:54.956183"], ["updated_at", "2017-09-26 20:00:54.956183"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "adresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["street", "7150 Alameda Ladislau Carvalho"], ["city", "Grande Ricardo"], ["state", "GO"], ["contact_id", 3], ["created_at", "2017-09-26 20:00:54.961227"], ["updated_at", "2017-09-26 20:00:54.961227"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "adresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["street", "s/n Rua Rafaela"], ["city", "Aguiar de Nossa Senhora"], ["state", "MA"], ["contact_id", 4], ["created_at", "2017-09-26 20:00:54.965997"], ["updated_at", "2017-09-26 20:00:54.965997"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO "adresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["street", "7620 Rua Júlio"], ["city", "Velha Fabrício"], ["state", "AP"], ["contact_id", 5], ["created_at", "2017-09-26 20:00:54.970361"], ["updated_at", "2017-09-26 20:00:54.970361"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "adresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["street", "s/n Viela Ladislau Ramos"], ["city", "Eduardo do Sul"], ["state", "AC"], ["contact_id", 6], ["created_at", "2017-09-26 20:00:54.976490"], ["updated_at", "2017-09-26 20:00:54.976490"]]
+  [1m[35m (1.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "adresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["street", "s/n Marginal Catarina Duarte"], ["city", "Município de Célia"], ["state", "AM"], ["contact_id", 7], ["created_at", "2017-09-26 20:00:54.981927"], ["updated_at", "2017-09-26 20:00:54.981927"]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "adresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["street", "812 Ponte Esther"], ["city", "Alessandro do Sul"], ["state", "ES"], ["contact_id", 8], ["created_at", "2017-09-26 20:00:54.987885"], ["updated_at", "2017-09-26 20:00:54.987885"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "adresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["street", "s/n Rodovia Suélen"], ["city", "Município de Isabelly do Descoberto"], ["state", "SC"], ["contact_id", 9], ["created_at", "2017-09-26 20:00:54.993520"], ["updated_at", "2017-09-26 20:00:54.993520"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "adresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["street", "6395 Avenida César"], ["city", "Larissa do Norte"], ["state", "BA"], ["contact_id", 10], ["created_at", "2017-09-26 20:00:54.997379"], ["updated_at", "2017-09-26 20:00:54.997379"]]
+  [1m[35m (1.3ms)[0m  commit transaction
+  [1m[36mContact Load (0.3ms)[0m  [1mSELECT "contacts".* FROM "contacts"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "(29) 9155-1769"], ["contact_id", 1], ["created_at", "2017-09-26 20:00:55.012862"], ["updated_at", "2017-09-26 20:00:55.012862"]]
+  [1m[35m (1.2ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "(36) 77143-1284"], ["contact_id", 1], ["created_at", "2017-09-26 20:00:55.017220"], ["updated_at", "2017-09-26 20:00:55.017220"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "(55) 34687-2408"], ["contact_id", 1], ["created_at", "2017-09-26 20:00:55.021431"], ["updated_at", "2017-09-26 20:00:55.021431"]]
+  [1m[35m (1.3ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "(27) 07524-5960"], ["contact_id", 2], ["created_at", "2017-09-26 20:00:55.025546"], ["updated_at", "2017-09-26 20:00:55.025546"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "+55 (35) 0043-1873"], ["contact_id", 2], ["created_at", "2017-09-26 20:00:55.029579"], ["updated_at", "2017-09-26 20:00:55.029579"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "+55 (70) 1805-9846"], ["contact_id", 2], ["created_at", "2017-09-26 20:00:55.033413"], ["updated_at", "2017-09-26 20:00:55.033413"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "(55) 94762-0076"], ["contact_id", 2], ["created_at", "2017-09-26 20:00:55.036904"], ["updated_at", "2017-09-26 20:00:55.036904"]]
+  [1m[35m (1.2ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "(82) 46209-2307"], ["contact_id", 3], ["created_at", "2017-09-26 20:00:55.041790"], ["updated_at", "2017-09-26 20:00:55.041790"]]
+  [1m[36m (3.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "(54) 3999-7818"], ["contact_id", 3], ["created_at", "2017-09-26 20:00:55.048707"], ["updated_at", "2017-09-26 20:00:55.048707"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "(94) 3385-5101"], ["contact_id", 3], ["created_at", "2017-09-26 20:00:55.052283"], ["updated_at", "2017-09-26 20:00:55.052283"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "(50) 05591-4556"], ["contact_id", 3], ["created_at", "2017-09-26 20:00:55.055471"], ["updated_at", "2017-09-26 20:00:55.055471"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "(16) 9218-8622"], ["contact_id", 4], ["created_at", "2017-09-26 20:00:55.059956"], ["updated_at", "2017-09-26 20:00:55.059956"]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "(89) 7733-9264"], ["contact_id", 4], ["created_at", "2017-09-26 20:00:55.064075"], ["updated_at", "2017-09-26 20:00:55.064075"]]
+  [1m[35m (2.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "(97) 91965-6596"], ["contact_id", 4], ["created_at", "2017-09-26 20:00:55.070302"], ["updated_at", "2017-09-26 20:00:55.070302"]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "(76) 17093-2562"], ["contact_id", 4], ["created_at", "2017-09-26 20:00:55.075267"], ["updated_at", "2017-09-26 20:00:55.075267"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "(25) 1750-2795"], ["contact_id", 4], ["created_at", "2017-09-26 20:00:55.079213"], ["updated_at", "2017-09-26 20:00:55.079213"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "(85) 30481-4267"], ["contact_id", 5], ["created_at", "2017-09-26 20:00:55.081900"], ["updated_at", "2017-09-26 20:00:55.081900"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "(64) 9784-3161"], ["contact_id", 6], ["created_at", "2017-09-26 20:00:55.084564"], ["updated_at", "2017-09-26 20:00:55.084564"]]
+  [1m[36m (1.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "(54) 89114-3958"], ["contact_id", 6], ["created_at", "2017-09-26 20:00:55.089377"], ["updated_at", "2017-09-26 20:00:55.089377"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "+55 (32) 4768-5593"], ["contact_id", 6], ["created_at", "2017-09-26 20:00:55.091857"], ["updated_at", "2017-09-26 20:00:55.091857"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "+55 (46) 7243-1506"], ["contact_id", 6], ["created_at", "2017-09-26 20:00:55.094937"], ["updated_at", "2017-09-26 20:00:55.094937"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "(17) 4668-8404"], ["contact_id", 7], ["created_at", "2017-09-26 20:00:55.098561"], ["updated_at", "2017-09-26 20:00:55.098561"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "(61) 29109-2650"], ["contact_id", 7], ["created_at", "2017-09-26 20:00:55.101627"], ["updated_at", "2017-09-26 20:00:55.101627"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "(80) 4796-5126"], ["contact_id", 8], ["created_at", "2017-09-26 20:00:55.104617"], ["updated_at", "2017-09-26 20:00:55.104617"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "(36) 0991-0023"], ["contact_id", 8], ["created_at", "2017-09-26 20:00:55.108355"], ["updated_at", "2017-09-26 20:00:55.108355"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "(41) 71836-0418"], ["contact_id", 8], ["created_at", "2017-09-26 20:00:55.111206"], ["updated_at", "2017-09-26 20:00:55.111206"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "+55 (24) 0880-0651"], ["contact_id", 8], ["created_at", "2017-09-26 20:00:55.113501"], ["updated_at", "2017-09-26 20:00:55.113501"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "(96) 19815-4352"], ["contact_id", 9], ["created_at", "2017-09-26 20:00:55.115468"], ["updated_at", "2017-09-26 20:00:55.115468"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["phone", "(36) 6167-3834"], ["contact_id", 10], ["created_at", "2017-09-26 20:00:55.117525"], ["updated_at", "2017-09-26 20:00:55.117525"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["phone", "(44) 2549-3307"], ["contact_id", 10], ["created_at", "2017-09-26 20:00:55.120535"], ["updated_at", "2017-09-26 20:00:55.120535"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/" for ::1 at 2017-09-26 17:01:18 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (871.1ms)
+Completed 200 OK in 1151ms (Views: 1141.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 17:01:21 -0300
+Processing by ContactsController#index as HTML
+  [1m[35mContact Load (0.3ms)[0m  SELECT "contacts".* FROM "contacts"
+  [1m[36mKind Load (0.2ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered contacts/shared/_teste.html.erb (0.4ms)
+  Rendered contacts/index.html.erb within layouts/application (49.0ms)
+Completed 200 OK in 103ms (Views: 80.2ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 17:01:59 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mContact Load (0.4ms)[0m  [1mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36mAdress Load (0.1ms)[0m  [1mSELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1[0m  [["contact_id", 1]]
+  Rendered contacts/_form.html.erb (33.8ms)
+  Rendered contacts/edit.html.erb within layouts/application (35.9ms)
+Completed 200 OK in 110ms (Views: 61.2ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 17:07:04 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ContactsController#index as HTML
+  [1m[35mContact Load (0.2ms)[0m  SELECT "contacts".* FROM "contacts"
+  [1m[36mKind Load (0.2ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.2ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (1076.7ms)
+Completed 200 OK in 1372ms (Views: 1354.6ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 17:07:06 -0300
+Processing by ContactsController#index as HTML
+  [1m[36mContact Load (0.3ms)[0m  [1mSELECT "contacts".* FROM "contacts"[0m
+  [1m[35mKind Load (0.2ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mKind Load (0.2ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mKind Load (0.2ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (13.2ms)
+Completed 200 OK in 83ms (Views: 81.3ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 17:07:06 -0300
+Processing by ContactsController#index as HTML
+  [1m[35mContact Load (0.3ms)[0m  SELECT "contacts".* FROM "contacts"
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.2ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (12.5ms)
+Completed 200 OK in 48ms (Views: 47.0ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 17:07:14 -0300
+Processing by ContactsController#index as HTML
+  [1m[36mContact Load (0.2ms)[0m  [1mSELECT "contacts".* FROM "contacts"[0m
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mKind Load (0.2ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (13.7ms)
+Completed 200 OK in 58ms (Views: 56.6ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 17:07:19 -0300
+Processing by ContactsController#index as HTML
+  [1m[35mContact Load (0.2ms)[0m  SELECT "contacts".* FROM "contacts"
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (15.3ms)
+Completed 200 OK in 57ms (Views: 55.6ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 17:08:25 -0300
+Processing by ContactsController#index as HTML
+  [1m[36mContact Load (0.6ms)[0m  [1mSELECT "contacts".* FROM "contacts"[0m
+  [1m[35mKind Load (0.2ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mKind Load (0.2ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mCACHE (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (27.1ms)
+Completed 200 OK in 79ms (Views: 75.9ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 17:09:46 -0300
+Processing by ContactsController#index as HTML
+  [1m[35mContact Load (0.2ms)[0m  SELECT "contacts".* FROM "contacts"
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (9.7ms)
+Completed 200 OK in 39ms (Views: 37.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 17:19:47 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ContactsController#index as HTML
+  [1m[35mContact Load (0.2ms)[0m  SELECT "contacts".* FROM "contacts"
+  [1m[36mKind Load (0.2ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (1018.3ms)
+Completed 200 OK in 1296ms (Views: 1280.0ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 17:20:12 -0300
+Processing by ContactsController#index as HTML
+  [1m[36mContact Load (0.2ms)[0m  [1mSELECT "contacts".* FROM "contacts"[0m
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (13.6ms)
+Completed 200 OK in 65ms (Views: 63.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 17:23:07 -0300
+Processing by ContactsController#index as HTML
+  [1m[35mContact Load (0.4ms)[0m  SELECT "contacts".* FROM "contacts"
+  [1m[36mKind Load (0.2ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.2ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mKind Load (0.2ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (18.6ms)
+Completed 200 OK in 49ms (Views: 47.8ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 17:27:44 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ContactsController#index as HTML
+  [1m[35mContact Load (0.2ms)[0m  SELECT "contacts".* FROM "contacts"
+  [1m[36mKind Load (0.2ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (897.0ms)
+Completed 200 OK in 1141ms (Views: 1125.7ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 17:29:22 -0300
+Processing by ContactsController#index as HTML
+  [1m[36mContact Load (0.3ms)[0m  [1mSELECT "contacts".* FROM "contacts"[0m
+  [1m[35mKind Load (0.2ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (13.9ms)
+Completed 200 OK in 68ms (Views: 66.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 17:33:56 -0300
+Processing by ContactsController#index as HTML
+  Rendered contacts/index.html.erb within layouts/application (870.5ms)
+Completed 500 Internal Server Error in 879ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (translation data {:one=>"Contato", :others=>"Contatos"} can not be used with :count => 2):
+    1: <p id="notice"><%= notice %></p>
+    2: 
+    3: <h1>Listing <%= Contact.model_name.human(count: 2) %></h1>
+    4: 
+    5: <table>
+    6:   <thead>
+  app/views/contacts/index.html.erb:3:in `_app_views_contacts_index_html_erb__1369441334971486255_70132601799180'
+
+
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.7ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (64.1ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.6ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (53.8ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.6ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (125.6ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 17:35:12 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ContactsController#index as HTML
+  Rendered contacts/index.html.erb within layouts/application (869.5ms)
+Completed 500 Internal Server Error in 895ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (translation data {:one=>"Contato", :others=>"Contatos"} can not be used with :count => 2):
+    1: <p id="notice"><%= notice %></p>
+    2: 
+    3: <h1>Listing <%= Contact.model_name.human(count: 2) %></h1>
+    4: 
+    5: <table>
+    6:   <thead>
+  app/views/contacts/index.html.erb:3:in `_app_views_contacts_index_html_erb__4269569090477402741_70287120603440'
+
+
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.8ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.7ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (65.0ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.6ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (52.0ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (118.2ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 17:37:22 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ContactsController#index as HTML
+  [1m[35mContact Load (0.2ms)[0m  SELECT "contacts".* FROM "contacts"
+  [1m[36mKind Load (0.2ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (894.5ms)
+Completed 200 OK in 1147ms (Views: 1131.3ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 17:41:04 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ContactsController#index as HTML
+  [1m[35mContact Load (0.2ms)[0m  SELECT "contacts".* FROM "contacts"
+  [1m[36mKind Load (0.2ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (898.1ms)
+Completed 200 OK in 1135ms (Views: 1119.8ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 17:41:20 -0300
+Processing by ContactsController#index as HTML
+  [1m[36mContact Load (0.2ms)[0m  [1mSELECT "contacts".* FROM "contacts"[0m
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (13.9ms)
+Completed 200 OK in 68ms (Views: 66.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 17:47:03 -0300
+Processing by ContactsController#index as HTML
+  Rendered contacts/index.html.erb within layouts/application (7.5ms)
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (undefined method `model' for nil:NilClass):
+    1: <p id="notice"><%= notice %></p>
+    2: 
+    3: <h1><%= "#{t('messages.listing')} #{@contact.model.model_name.human(count: 2)}" %></h1>
+    4: 
+    5: <table>
+    6:   <thead>
+  app/views/contacts/index.html.erb:3:in `_app_views_contacts_index_html_erb___2655915692507881657_70300863463800'
+
+
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.8ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (64.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (53.8ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (119.2ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 17:48:11 -0300
+Processing by ContactsController#index as HTML
+  [1m[35mContact Load (0.2ms)[0m  SELECT "contacts".* FROM "contacts"
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (19.0ms)
+Completed 200 OK in 57ms (Views: 55.3ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/contacts/3/edit" for ::1 at 2017-09-26 17:48:22 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mContact Load (0.2ms)[0m  [1mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mKind Load (0.2ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36mAdress Load (0.2ms)[0m  [1mSELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1[0m  [["contact_id", 3]]
+  Rendered contacts/_form.html.erb (45.7ms)
+  Rendered contacts/edit.html.erb within layouts/application (51.8ms)
+Completed 200 OK in 102ms (Views: 83.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 17:49:59 -0300
+Processing by ContactsController#index as HTML
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "contacts"
+  [1m[36mContact Load (0.2ms)[0m  [1mSELECT "contacts".* FROM "contacts"[0m
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (15.6ms)
+Completed 200 OK in 47ms (Views: 45.7ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 17:51:39 -0300
+Processing by ContactsController#index as HTML
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "contacts"
+  [1m[36mContact Load (0.3ms)[0m  [1mSELECT "contacts".* FROM "contacts"[0m
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (20.9ms)
+Completed 200 OK in 56ms (Views: 54.7ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 17:51:42 -0300
+Processing by ContactsController#index as HTML
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "contacts"
+  [1m[36mContact Load (0.4ms)[0m  [1mSELECT "contacts".* FROM "contacts"[0m
+  [1m[35mKind Load (0.2ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mKind Load (0.2ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (20.7ms)
+Completed 200 OK in 55ms (Views: 53.1ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 17:54:45 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ContactsController#index as HTML
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "contacts"
+  [1m[36mContact Load (0.2ms)[0m  [1mSELECT "contacts".* FROM "contacts"[0m
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (916.8ms)
+Completed 200 OK in 1174ms (Views: 1158.1ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 17:57:30 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mContact Load (0.2ms)[0m  SELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT "kinds".* FROM "kinds"[0m
+  [1m[35mAdress Load (0.2ms)[0m  SELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1  [["contact_id", 1]]
+  Rendered contacts/_form.html.erb (1043.8ms)
+  Rendered contacts/edit.html.erb within layouts/application (1050.4ms)
+Completed 200 OK in 1095ms (Views: 1077.2ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 18:03:38 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mContact Load (0.1ms)[0m  [1mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered contacts/_form.html.erb (986.2ms)
+  Rendered contacts/edit.html.erb within layouts/application (987.9ms)
+Completed 500 Internal Server Error in 1005ms (ActiveRecord: 0.5ms)
+
+ActionView::Template::Error (can not load translations from /Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml: #<Psych::SyntaxError: (/Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml): did not find expected key while parsing a block mapping at line 3 column 5>):
+    14:   <h1>Contacts</h1>
+    15: 
+    16:   <div class="field">
+    17:     <%= f.label :name %><br>
+    18:     <%= f.text_field :name %>
+    19:   </div>
+    20:   <div class="field">
+  app/views/contacts/_form.html.erb:17:in `block in _app_views_contacts__form_html_erb__1946512274696698989_70348185499720'
+  app/views/contacts/_form.html.erb:1:in `_app_views_contacts__form_html_erb__1946512274696698989_70348185499720'
+  app/views/contacts/edit.html.erb:3:in `_app_views_contacts_edit_html_erb__885949679063652430_70348223415520'
+
+
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (10.1ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (82.8ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.9ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (987.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (1025.1ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 18:04:22 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mContact Load (0.1ms)[0m  SELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered contacts/_form.html.erb (981.8ms)
+  Rendered contacts/edit.html.erb within layouts/application (983.3ms)
+Completed 500 Internal Server Error in 1001ms (ActiveRecord: 0.5ms)
+
+ActionView::Template::Error (can not load translations from /Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml: #<Psych::SyntaxError: (/Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml): did not find expected key while parsing a block mapping at line 3 column 5>):
+    14:   <h1>Contacts</h1>
+    15: 
+    16:   <div class="field">
+    17:     <%= f.label :name %><br>
+    18:     <%= f.text_field :name %>
+    19:   </div>
+    20:   <div class="field">
+  app/views/contacts/_form.html.erb:17:in `block in _app_views_contacts__form_html_erb__1946512274696698989_70348185499720'
+  app/views/contacts/_form.html.erb:1:in `_app_views_contacts__form_html_erb__1946512274696698989_70348185499720'
+  app/views/contacts/edit.html.erb:3:in `_app_views_contacts_edit_html_erb__885949679063652430_70348223415520'
+
+
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (14.1ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.0ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (77.7ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (924.1ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (956.0ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 18:05:13 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mContact Load (0.1ms)[0m  [1mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered contacts/_form.html.erb (1020.6ms)
+  Rendered contacts/edit.html.erb within layouts/application (1022.6ms)
+Completed 500 Internal Server Error in 1043ms (ActiveRecord: 0.6ms)
+
+ActionView::Template::Error (can not load translations from /Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml: #<Psych::SyntaxError: (/Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml): did not find expected key while parsing a block mapping at line 3 column 5>):
+    14:   <h1>Contacts</h1>
+    15: 
+    16:   <div class="field">
+    17:     <%= f.label :name %><br>
+    18:     <%= f.text_field :name %>
+    19:   </div>
+    20:   <div class="field">
+  app/views/contacts/_form.html.erb:17:in `block in _app_views_contacts__form_html_erb__1946512274696698989_70348185499720'
+  app/views/contacts/_form.html.erb:1:in `_app_views_contacts__form_html_erb__1946512274696698989_70348185499720'
+  app/views/contacts/edit.html.erb:3:in `_app_views_contacts_edit_html_erb__885949679063652430_70348223415520'
+
+
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (8.9ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.5ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (73.1ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (1027.8ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (1060.6ms)
+
+
+Started GET "/" for ::1 at 2017-09-26 18:06:51 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (938.5ms)
+Completed 500 Internal Server Error in 958ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (can not load translations from /Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml: #<Psych::SyntaxError: (/Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml): did not find expected key while parsing a block mapping at line 3 column 5>):
+    1: <h1>Seja Bem Vindo</h1>
+    2: 
+    3: <h2><%= t 'hello' %></h2>
+    4: <h2><%= l Date.today %></h2>
+    5: 
+    6: <ul>
+  app/views/home/index.html.erb:3:in `_app_views_home_index_html_erb___262191810136360668_70109174345660'
+
+
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (7.7ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.0ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (70.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.7ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (968.1ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (1000.3ms)
+
+
+Started GET "/" for ::1 at 2017-09-26 18:09:33 -0300
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (908.2ms)
+Completed 500 Internal Server Error in 914ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (can not load translations from /Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml: #<Psych::SyntaxError: (/Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml): did not find expected key while parsing a block mapping at line 3 column 5>):
+    1: <h1>Seja Bem Vindo</h1>
+    2: 
+    3: <h2><%= t 'hello' %></h2>
+    4: <h2><%= l Date.today %></h2>
+    5: 
+    6: <ul>
+  app/views/home/index.html.erb:3:in `_app_views_home_index_html_erb___262191810136360668_70109174345660'
+
+
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (7.6ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.7ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (66.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (975.6ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (1009.7ms)
+
+
+Started GET "/" for ::1 at 2017-09-26 18:10:27 -0300
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (926.4ms)
+Completed 500 Internal Server Error in 934ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (can not load translations from /Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml: #<Psych::SyntaxError: (/Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml): did not find expected key while parsing a block mapping at line 3 column 5>):
+    1: <h1>Seja Bem Vindo</h1>
+    2: 
+    3: <h2><%= t 'hello' %></h2>
+    4: <h2><%= l Date.today %></h2>
+    5: 
+    6: <ul>
+  app/views/home/index.html.erb:3:in `_app_views_home_index_html_erb___262191810136360668_70109174345660'
+
+
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (10.8ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.2ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (68.8ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (974.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (1009.0ms)
+
+
+Started GET "/" for ::1 at 2017-09-26 18:13:10 -0300
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (1003.1ms)
+Completed 500 Internal Server Error in 1009ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (can not load translations from /Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml: #<Psych::SyntaxError: (/Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml): did not find expected key while parsing a block mapping at line 3 column 5>):
+    1: <h1>Seja Bem Vindo</h1>
+    2: 
+    3: <h2><%= t 'hello' %></h2>
+    4: <h2><%= l Date.today %></h2>
+    5: 
+    6: <ul>
+  app/views/home/index.html.erb:3:in `_app_views_home_index_html_erb___262191810136360668_70109174345660'
+
+
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (7.1ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.9ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (65.1ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (1000.0ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (1031.6ms)
+
+
+Started GET "/" for ::1 at 2017-09-26 18:13:23 -0300
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (905.6ms)
+Completed 500 Internal Server Error in 912ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (can not load translations from /Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml: #<Psych::SyntaxError: (/Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml): did not find expected key while parsing a block mapping at line 3 column 5>):
+    1: <h1>Seja Bem Vindo</h1>
+    2: 
+    3: <h2><%= t 'hello' %></h2>
+    4: <h2><%= l Date.today %></h2>
+    5: 
+    6: <ul>
+  app/views/home/index.html.erb:3:in `_app_views_home_index_html_erb___262191810136360668_70109174345660'
+
+
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (7.6ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.7ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (72.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (1014.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (1045.3ms)
+
+
+Started GET "/" for ::1 at 2017-09-26 18:15:22 -0300
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (964.4ms)
+Completed 500 Internal Server Error in 972ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (can not load translations from /Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml: #<Psych::SyntaxError: (/Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml): did not find expected key while parsing a block mapping at line 3 column 5>):
+    1: <h1>Seja Bem Vindo</h1>
+    2: 
+    3: <h2><%= t 'hello' %></h2>
+    4: <h2><%= l Date.today %></h2>
+    5: 
+    6: <ul>
+  app/views/home/index.html.erb:3:in `_app_views_home_index_html_erb___262191810136360668_70109174345660'
+
+
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (7.2ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (4.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (69.8ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.8ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (967.1ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (1007.3ms)
+
+
+Started GET "/" for ::1 at 2017-09-26 18:15:33 -0300
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (929.0ms)
+Completed 500 Internal Server Error in 936ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (can not load translations from /Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml: #<Psych::SyntaxError: (/Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml): did not find expected key while parsing a block mapping at line 3 column 5>):
+    1: <h1>Seja Bem Vindo</h1>
+    2: 
+    3: <h2><%= t 'hello' %></h2>
+    4: <h2><%= l Date.today %></h2>
+    5: 
+    6: <ul>
+  app/views/home/index.html.erb:3:in `_app_views_home_index_html_erb___262191810136360668_70109174345660'
+
+
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (9.2ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.0ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (70.1ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (1036.7ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (1066.9ms)
+
+
+Started GET "/" for ::1 at 2017-09-26 18:17:12 -0300
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (964.6ms)
+Completed 500 Internal Server Error in 972ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (can not load translations from /Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml: #<Psych::SyntaxError: (/Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml): did not find expected key while parsing a block mapping at line 3 column 5>):
+    1: <h1>Seja Bem Vindo</h1>
+    2: 
+    3: <h2><%= t 'hello' %></h2>
+    4: <h2><%= l Date.today %></h2>
+    5: 
+    6: <ul>
+  app/views/home/index.html.erb:3:in `_app_views_home_index_html_erb___262191810136360668_70109174345660'
+
+
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (8.5ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.0ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (70.2ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (978.8ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (1024.5ms)
+
+
+Started GET "/" for ::1 at 2017-09-26 18:17:25 -0300
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (965.1ms)
+Completed 500 Internal Server Error in 971ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (can not load translations from /Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml: expects it to return a hash, but does not):
+    1: <h1>Seja Bem Vindo</h1>
+    2: 
+    3: <h2><%= t 'hello' %></h2>
+    4: <h2><%= l Date.today %></h2>
+    5: 
+    6: <ul>
+  app/views/home/index.html.erb:3:in `_app_views_home_index_html_erb___262191810136360668_70109174345660'
+
+
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (12.0ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (4.8ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.6ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (77.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (968.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (1000.0ms)
+
+
+Started GET "/" for ::1 at 2017-09-26 18:18:04 -0300
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (914.7ms)
+Completed 500 Internal Server Error in 920ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (can not load translations from /Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml: expects it to return a hash, but does not):
+    1: <h1>Seja Bem Vindo</h1>
+    2: 
+    3: <h2><%= t 'hello' %></h2>
+    4: <h2><%= l Date.today %></h2>
+    5: 
+    6: <ul>
+  app/views/home/index.html.erb:3:in `_app_views_home_index_html_erb___262191810136360668_70109174345660'
+
+
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (8.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.2ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.8ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (68.7ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.6ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (962.1ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (992.6ms)
+
+
+Started GET "/" for ::1 at 2017-09-26 18:19:23 -0300
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 277ms (Views: 276.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2017-09-26 18:19:47 -0300
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 34ms (Views: 33.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 18:19:50 -0300
+Processing by ContactsController#index as HTML
+  Rendered contacts/index.html.erb within layouts/application (969.7ms)
+Completed 500 Internal Server Error in 1012ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (can not load translations from /Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml: #<Psych::SyntaxError: (/Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml): did not find expected key while parsing a block mapping at line 3 column 5>):
+    1: <p id="notice"><%= notice %></p>
+    2: 
+    3: <h1><%= "#{t('messages.listing')} #{@contacts.model.model_name.human(count: @contacts.count)}" %></h1>
+    4: 
+    5: <table>
+    6: <thead>
+  app/views/contacts/index.html.erb:3:in `_app_views_contacts_index_html_erb___4080736824064259427_70109181638000'
+
+
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (9.2ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.9ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.6ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (74.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.8ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (1056.1ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (1087.3ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 18:25:20 -0300
+Processing by ContactsController#index as HTML
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "contacts"
+  [1m[36mContact Load (0.2ms)[0m  [1mSELECT "contacts".* FROM "contacts"[0m
+  [1m[35mKind Load (0.2ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (1181.0ms)
+Completed 200 OK in 1220ms (Views: 1214.2ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 18:25:23 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mContact Load (0.2ms)[0m  SELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mKind Load (0.2ms)[0m  [1mSELECT "kinds".* FROM "kinds"[0m
+  [1m[35mAdress Load (0.3ms)[0m  SELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1  [["contact_id", 1]]
+  Rendered contacts/_form.html.erb (50.9ms)
+  Rendered contacts/edit.html.erb within layouts/application (56.3ms)
+Completed 200 OK in 102ms (Views: 91.4ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 18:25:53 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mContact Load (0.1ms)[0m  [1mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.5ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36mAdress Load (0.2ms)[0m  [1mSELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1[0m  [["contact_id", 1]]
+  Rendered contacts/_form.html.erb (1032.8ms)
+  Rendered contacts/edit.html.erb within layouts/application (1034.8ms)
+Completed 200 OK in 1075ms (Views: 1063.1ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 18:26:07 -0300
+Processing by ContactsController#index as HTML
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "contacts"
+  [1m[36mContact Load (0.2ms)[0m  [1mSELECT "contacts".* FROM "contacts"[0m
+  [1m[35mKind Load (0.2ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mKind Load (0.2ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mKind Load (0.2ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (22.5ms)
+Completed 200 OK in 58ms (Views: 56.1ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 18:26:10 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mContact Load (0.3ms)[0m  SELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mKind Load (0.2ms)[0m  [1mSELECT "kinds".* FROM "kinds"[0m
+  [1m[35mAdress Load (0.1ms)[0m  SELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1  [["contact_id", 1]]
+  Rendered contacts/_form.html.erb (15.4ms)
+  Rendered contacts/edit.html.erb within layouts/application (27.7ms)
+Completed 200 OK in 69ms (Views: 65.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 18:27:38 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mContact Load (0.2ms)[0m  [1mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36mAdress Load (0.2ms)[0m  [1mSELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1[0m  [["contact_id", 1]]
+  Rendered contacts/_form.html.erb (975.7ms)
+  Rendered contacts/edit.html.erb within layouts/application (977.4ms)
+Completed 200 OK in 1017ms (Views: 1005.8ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 18:28:02 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mContact Load (0.2ms)[0m  SELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT "kinds".* FROM "kinds"[0m
+  [1m[35mAdress Load (0.1ms)[0m  SELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1  [["contact_id", 1]]
+  Rendered contacts/_form.html.erb (921.0ms)
+  Rendered contacts/edit.html.erb within layouts/application (927.0ms)
+Completed 200 OK in 1196ms (Views: 1163.0ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 18:30:03 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mContact Load (0.2ms)[0m  [1mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.2ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36mAdress Load (0.1ms)[0m  [1mSELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1[0m  [["contact_id", 1]]
+  Rendered contacts/_form.html.erb (6.9ms)
+  Rendered contacts/edit.html.erb within layouts/application (9.4ms)
+Completed 200 OK in 75ms (Views: 72.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 18:30:06 -0300
+Processing by ContactsController#index as HTML
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "contacts"
+  [1m[36mContact Load (0.9ms)[0m  [1mSELECT "contacts".* FROM "contacts"[0m
+  [1m[35mKind Load (0.3ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (32.6ms)
+Completed 200 OK in 76ms (Views: 73.2ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/contacts/new" for ::1 at 2017-09-26 18:30:08 -0300
+Processing by ContactsController#new as HTML
+  [1m[35mKind Load (0.2ms)[0m  SELECT "kinds".* FROM "kinds"
+  Rendered contacts/_form.html.erb (11.1ms)
+  Rendered contacts/new.html.erb within layouts/application (14.0ms)
+Completed 200 OK in 92ms (Views: 89.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 18:30:23 -0300
+Processing by ContactsController#index as HTML
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "contacts"[0m
+  [1m[35mContact Load (0.2ms)[0m  SELECT "contacts".* FROM "contacts"
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.2ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (1050.6ms)
+Completed 200 OK in 1084ms (Views: 1079.0ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 18:30:25 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mContact Load (0.6ms)[0m  [1mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.7ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36mAdress Load (0.2ms)[0m  [1mSELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1[0m  [["contact_id", 1]]
+  Rendered contacts/_form.html.erb (25.6ms)
+  Rendered contacts/edit.html.erb within layouts/application (35.4ms)
+Completed 200 OK in 71ms (Views: 65.9ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 18:30:47 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mContact Load (0.1ms)[0m  SELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT "kinds".* FROM "kinds"[0m
+  [1m[35mAdress Load (0.3ms)[0m  SELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1  [["contact_id", 1]]
+  Rendered contacts/_form.html.erb (878.5ms)
+  Rendered contacts/edit.html.erb within layouts/application (881.3ms)
+Completed 200 OK in 926ms (Views: 913.5ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 18:31:01 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mContact Load (0.2ms)[0m  [1mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36mAdress Load (0.2ms)[0m  [1mSELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1[0m  [["contact_id", 1]]
+  Rendered contacts/_form.html.erb (883.8ms)
+  Rendered contacts/edit.html.erb within layouts/application (885.3ms)
+Completed 200 OK in 934ms (Views: 918.4ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 18:34:46 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mContact Load (0.2ms)[0m  SELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered contacts/_form.html.erb (1007.9ms)
+  Rendered contacts/edit.html.erb within layouts/application (1009.6ms)
+Completed 500 Internal Server Error in 1029ms (ActiveRecord: 0.6ms)
+
+ActionView::Template::Error (can not load translations from /Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml: expects it to return a hash, but does not):
+    14:   <h1>Contacts</h1>
+    15: 
+    16:   <div class="field">
+    17:     <%= f.label :name %><br>
+    18:     <%= f.text_field :name %>
+    19:   </div>
+    20:   <div class="field">
+  app/views/contacts/_form.html.erb:17:in `block in _app_views_contacts__form_html_erb__4463997882257783397_70251196414600'
+  app/views/contacts/_form.html.erb:1:in `_app_views_contacts__form_html_erb__4463997882257783397_70251196414600'
+  app/views/contacts/edit.html.erb:3:in `_app_views_contacts_edit_html_erb__1373034164298400392_70251196769180'
+
+
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (10.7ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.2ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (76.9ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.6ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (928.0ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (961.1ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 18:34:49 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mContact Load (0.2ms)[0m  [1mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered contacts/_form.html.erb (912.3ms)
+  Rendered contacts/edit.html.erb within layouts/application (914.9ms)
+Completed 500 Internal Server Error in 923ms (ActiveRecord: 0.2ms)
+
+ActionView::Template::Error (can not load translations from /Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml: expects it to return a hash, but does not):
+    14:   <h1>Contacts</h1>
+    15: 
+    16:   <div class="field">
+    17:     <%= f.label :name %><br>
+    18:     <%= f.text_field :name %>
+    19:   </div>
+    20:   <div class="field">
+  app/views/contacts/_form.html.erb:17:in `block in _app_views_contacts__form_html_erb__4463997882257783397_70251196414600'
+  app/views/contacts/_form.html.erb:1:in `_app_views_contacts__form_html_erb__4463997882257783397_70251196414600'
+  app/views/contacts/edit.html.erb:3:in `_app_views_contacts_edit_html_erb__1373034164298400392_70251196769180'
+
+
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (10.5ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.6ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (70.2ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (1018.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (1048.3ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 18:34:51 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mContact Load (0.4ms)[0m  SELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered contacts/_form.html.erb (883.7ms)
+  Rendered contacts/edit.html.erb within layouts/application (885.1ms)
+Completed 500 Internal Server Error in 892ms (ActiveRecord: 0.4ms)
+
+ActionView::Template::Error (can not load translations from /Users/cesar/Documents/cursos/ruby/notebook_rails_curso/config/locales/models.pt-BR.yml: expects it to return a hash, but does not):
+    14:   <h1>Contacts</h1>
+    15: 
+    16:   <div class="field">
+    17:     <%= f.label :name %><br>
+    18:     <%= f.text_field :name %>
+    19:   </div>
+    20:   <div class="field">
+  app/views/contacts/_form.html.erb:17:in `block in _app_views_contacts__form_html_erb__4463997882257783397_70251196414600'
+  app/views/contacts/_form.html.erb:1:in `_app_views_contacts__form_html_erb__4463997882257783397_70251196414600'
+  app/views/contacts/edit.html.erb:3:in `_app_views_contacts_edit_html_erb__1373034164298400392_70251196769180'
+
+
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (10.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.8ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (71.6ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (1049.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (1082.2ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 18:36:11 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mContact Load (0.1ms)[0m  [1mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.6ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36mAdress Load (0.1ms)[0m  [1mSELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1[0m  [["contact_id", 1]]
+  Rendered contacts/_form.html.erb (1001.7ms)
+  Rendered contacts/edit.html.erb within layouts/application (1003.6ms)
+Completed 200 OK in 1056ms (Views: 1042.1ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/" for ::1 at 2017-09-26 18:36:22 -0300
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 31ms (Views: 30.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/adresses.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-09-26 18:36:22 -0300
+
+
+Started GET "/assets/contacts.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-09-26 18:36:22 -0300
+
+
+Started GET "/assets/phones.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-09-26 18:36:22 -0300
+
+
+Started GET "/assets/scaffolds.self-5053d873a19aba591c4cd00b3854c10712685ead47c26f159c103d54facde2bf.css?body=1" for ::1 at 2017-09-26 18:36:22 -0300
+
+
+Started GET "/assets/kinds.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-09-26 18:36:22 -0300
+
+
+Started GET "/assets/home.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-09-26 18:36:22 -0300
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2017-09-26 18:36:22 -0300
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2017-09-26 18:36:22 -0300
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2017-09-26 18:36:22 -0300
+
+
+Started GET "/assets/turbolinks.self-1d1fddf91adc38ac2045c51f0a3e05ca97d07d24d15a4dcbf705009106489e69.js?body=1" for ::1 at 2017-09-26 18:36:22 -0300
+
+
+Started GET "/assets/adresses.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2017-09-26 18:36:22 -0300
+
+
+Started GET "/assets/contacts.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2017-09-26 18:36:22 -0300
+
+
+Started GET "/assets/home.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2017-09-26 18:36:22 -0300
+
+
+Started GET "/assets/kinds.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2017-09-26 18:36:22 -0300
+
+
+Started GET "/assets/phones.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2017-09-26 18:36:22 -0300
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2017-09-26 18:36:22 -0300
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 18:36:24 -0300
+Processing by ContactsController#index as HTML
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "contacts"
+  Rendered contacts/index.html.erb within layouts/application (5.9ms)
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 0.2ms)
+
+ActionView::Template::Error (translation data {:name=>"Nome"} can not be used with :count => 10):
+    1: <p id="notice"><%= notice %></p>
+    2: 
+    3: <h1><%= "#{t('messages.listing')} #{@contacts.model.model_name.human(count: @contacts.count)}" %></h1>
+    4: 
+    5: <table>
+    6: <thead>
+  app/views/contacts/index.html.erb:3:in `_app_views_contacts_index_html_erb__4160994457362036245_70251240855420'
+
+
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.7ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.7ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (66.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (50.5ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (119.0ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 18:37:21 -0300
+Processing by ContactsController#index as HTML
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "contacts"[0m
+  [1m[35mContact Load (0.1ms)[0m  SELECT "contacts".* FROM "contacts"
+  [1m[36mKind Load (0.3ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (1020.1ms)
+Completed 200 OK in 1054ms (Views: 1049.2ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 18:37:25 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mContact Load (0.2ms)[0m  [1mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.2ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36mAdress Load (0.2ms)[0m  [1mSELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1[0m  [["contact_id", 1]]
+  Rendered contacts/_form.html.erb (22.0ms)
+  Rendered contacts/edit.html.erb within layouts/application (24.5ms)
+Completed 200 OK in 62ms (Views: 58.2ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/assets/down-arrow-7783a2e6bb8a01f19c806bf617fc7a30f2b8c44fc4dba4731253e7fa0802ad3b.png" for ::1 at 2017-09-26 18:37:25 -0300
+
+
+Started GET "/" for ::1 at 2017-09-26 18:39:18 -0300
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 40ms (Views: 39.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 18:39:21 -0300
+Processing by ContactsController#index as HTML
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "contacts"
+  Rendered contacts/index.html.erb within layouts/application (1017.6ms)
+Completed 500 Internal Server Error in 1038ms (ActiveRecord: 0.3ms)
+
+ActionView::Template::Error (translation data {:attributes=>{:contact=>{:name=>"Nome"}}} can not be used with :count => 10):
+    1: <p id="notice"><%= notice %></p>
+    2: 
+    3: <h1><%= "#{t('messages.listing')} #{@contacts.model.model_name.human(count: @contacts.count)}" %></h1>
+    4: 
+    5: <table>
+    6: <thead>
+  app/views/contacts/index.html.erb:3:in `_app_views_contacts_index_html_erb__4160994457362036245_70251240855420'
+
+
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (8.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.1ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (70.9ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (58.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (131.4ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 18:39:31 -0300
+Processing by ContactsController#index as HTML
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "contacts"[0m
+  Rendered contacts/index.html.erb within layouts/application (996.6ms)
+Completed 500 Internal Server Error in 1006ms (ActiveRecord: 0.3ms)
+
+ActionView::Template::Error (translation data {:attributes=>{:contact=>{:name=>"Nome"}}} can not be used with :count => 10):
+    1: <p id="notice"><%= notice %></p>
+    2: 
+    3: <h1><%= "#{t('messages.listing')} #{@contacts.model.model_name.human(count: @contacts.count)}" %></h1>
+    4: 
+    5: <table>
+    6: <thead>
+  app/views/contacts/index.html.erb:3:in `_app_views_contacts_index_html_erb__4160994457362036245_70251240855420'
+
+
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (9.8ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.1ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (82.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (52.5ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (119.3ms)
+
+
+Started GET "/" for ::1 at 2017-09-26 18:39:54 -0300
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 35ms (Views: 34.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 18:39:55 -0300
+Processing by ContactsController#index as HTML
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "contacts"
+  Rendered contacts/index.html.erb within layouts/application (8.4ms)
+Completed 500 Internal Server Error in 20ms (ActiveRecord: 0.3ms)
+
+ActionView::Template::Error (translation data {:attributes=>{:contact=>{:name=>"Nome"}}} can not be used with :count => 10):
+    1: <p id="notice"><%= notice %></p>
+    2: 
+    3: <h1><%= "#{t('messages.listing')} #{@contacts.model.model_name.human(count: @contacts.count)}" %></h1>
+    4: 
+    5: <table>
+    6: <thead>
+  app/views/contacts/index.html.erb:3:in `_app_views_contacts_index_html_erb__4160994457362036245_70251240855420'
+
+
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (9.1ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.8ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (67.1ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (51.8ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (117.7ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 18:40:45 -0300
+Processing by ContactsController#index as HTML
+  [1m[36m (0.5ms)[0m  [1mSELECT COUNT(*) FROM "contacts"[0m
+  Rendered contacts/index.html.erb within layouts/application (951.3ms)
+Completed 500 Internal Server Error in 961ms (ActiveRecord: 0.8ms)
+
+ActionView::Template::Error (translation data {:attributes=>{:contact=>{:name=>"Nome"}}} can not be used with :count => 10):
+    1: <p id="notice"><%= notice %></p>
+    2: 
+    3: <h1><%= "#{t('messages.listing')} #{@contacts.model.model_name.human(count: @contacts.count)}" %></h1>
+    4: 
+    5: <table>
+    6: <thead>
+  app/views/contacts/index.html.erb:3:in `_app_views_contacts_index_html_erb__4160994457362036245_70251240855420'
+
+
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (19.2ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.8ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (76.8ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.9ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (54.0ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/cesar/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (117.0ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 18:41:32 -0300
+Processing by ContactsController#index as HTML
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "contacts"
+  [1m[36mContact Load (0.1ms)[0m  [1mSELECT "contacts".* FROM "contacts"[0m
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (918.4ms)
+Completed 200 OK in 952ms (Views: 947.2ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 18:41:36 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mContact Load (0.2ms)[0m  SELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mKind Load (0.2ms)[0m  [1mSELECT "kinds".* FROM "kinds"[0m
+  [1m[35mAdress Load (0.3ms)[0m  SELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1  [["contact_id", 1]]
+  Rendered contacts/_form.html.erb (25.5ms)
+  Rendered contacts/edit.html.erb within layouts/application (28.5ms)
+Completed 200 OK in 74ms (Views: 71.2ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/contacts/4/edit" for ::1 at 2017-09-26 18:41:42 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mContact Load (0.1ms)[0m  [1mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35mKind Load (0.3ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36mAdress Load (0.2ms)[0m  [1mSELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1[0m  [["contact_id", 4]]
+  Rendered contacts/_form.html.erb (11.1ms)
+  Rendered contacts/edit.html.erb within layouts/application (14.2ms)
+Completed 200 OK in 71ms (Views: 69.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/contacts/4/edit" for ::1 at 2017-09-26 18:42:38 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"4"}
+  [1m[35mContact Load (0.2ms)[0m  SELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mKind Load (0.2ms)[0m  [1mSELECT "kinds".* FROM "kinds"[0m
+  [1m[35mAdress Load (0.1ms)[0m  SELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1  [["contact_id", 4]]
+  Rendered contacts/_form.html.erb (1019.3ms)
+  Rendered contacts/edit.html.erb within layouts/application (1020.8ms)
+Completed 200 OK in 1063ms (Views: 1048.1ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/contacts/4/edit" for ::1 at 2017-09-26 18:43:06 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mContact Load (0.2ms)[0m  [1mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35mKind Load (0.2ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36mAdress Load (0.1ms)[0m  [1mSELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1[0m  [["contact_id", 4]]
+  Rendered contacts/_form.html.erb (996.9ms)
+  Rendered contacts/edit.html.erb within layouts/application (999.5ms)
+Completed 200 OK in 1042ms (Views: 1028.4ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/contacts/4/edit" for ::1 at 2017-09-26 18:43:58 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"4"}
+  [1m[35mContact Load (0.1ms)[0m  SELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mKind Load (0.3ms)[0m  [1mSELECT "kinds".* FROM "kinds"[0m
+  [1m[35mAdress Load (0.1ms)[0m  SELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1  [["contact_id", 4]]
+  Rendered contacts/_form.html.erb (1035.5ms)
+  Rendered contacts/edit.html.erb within layouts/application (1037.3ms)
+Completed 200 OK in 1091ms (Views: 1079.1ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/contacts/4/edit" for ::1 at 2017-09-26 18:45:20 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mContact Load (0.1ms)[0m  [1mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35mKind Load (0.2ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36mAdress Load (0.1ms)[0m  [1mSELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1[0m  [["contact_id", 4]]
+  Rendered contacts/_form.html.erb (1071.4ms)
+  Rendered contacts/edit.html.erb within layouts/application (1073.9ms)
+Completed 200 OK in 1122ms (Views: 1111.2ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/contacts/4/edit" for ::1 at 2017-09-26 18:47:52 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"4"}
+  [1m[35mContact Load (0.2ms)[0m  SELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mKind Load (0.2ms)[0m  [1mSELECT "kinds".* FROM "kinds"[0m
+  [1m[35mAdress Load (0.1ms)[0m  SELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1  [["contact_id", 4]]
+  Rendered contacts/_form.html.erb (974.3ms)
+  Rendered contacts/edit.html.erb within layouts/application (976.3ms)
+Completed 200 OK in 1028ms (Views: 1015.4ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/contacts/4/edit" for ::1 at 2017-09-26 18:47:57 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mContact Load (0.1ms)[0m  [1mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35mKind Load (0.2ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36mAdress Load (0.2ms)[0m  [1mSELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1[0m  [["contact_id", 4]]
+  Rendered contacts/_form.html.erb (8.7ms)
+  Rendered contacts/edit.html.erb within layouts/application (10.7ms)
+Completed 200 OK in 43ms (Views: 41.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/contacts/4/edit" for ::1 at 2017-09-26 18:48:36 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"4"}
+  [1m[35mContact Load (0.1ms)[0m  SELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mKind Load (0.2ms)[0m  [1mSELECT "kinds".* FROM "kinds"[0m
+  [1m[35mAdress Load (0.1ms)[0m  SELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1  [["contact_id", 4]]
+  Rendered contacts/_form.html.erb (947.8ms)
+  Rendered contacts/edit.html.erb within layouts/application (949.4ms)
+Completed 200 OK in 990ms (Views: 979.1ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/contacts/4/edit" for ::1 at 2017-09-26 18:49:29 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mContact Load (0.1ms)[0m  [1mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36mAdress Load (0.1ms)[0m  [1mSELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1[0m  [["contact_id", 4]]
+  Rendered contacts/_form.html.erb (991.5ms)
+  Rendered contacts/edit.html.erb within layouts/application (993.0ms)
+Completed 200 OK in 1033ms (Views: 1022.2ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/contacts/4/edit" for ::1 at 2017-09-26 18:50:13 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"4"}
+  [1m[35mContact Load (0.3ms)[0m  SELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mKind Load (0.2ms)[0m  [1mSELECT "kinds".* FROM "kinds"[0m
+  [1m[35mAdress Load (0.1ms)[0m  SELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1  [["contact_id", 4]]
+  Rendered contacts/_form.html.erb (958.5ms)
+  Rendered contacts/edit.html.erb within layouts/application (962.0ms)
+Completed 200 OK in 1022ms (Views: 1002.3ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 18:51:06 -0300
+Processing by ContactsController#index as HTML
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "contacts"[0m
+  [1m[35mContact Load (0.8ms)[0m  SELECT "contacts".* FROM "contacts"
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (1148.6ms)
+Completed 200 OK in 1205ms (Views: 1198.6ms | ActiveRecord: 2.7ms)
+
+
+Started GET "/" for ::1 at 2017-09-26 18:51:07 -0300
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 43ms (Views: 41.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts" for ::1 at 2017-09-26 18:51:39 -0300
+Processing by ContactsController#index as HTML
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "contacts"[0m
+  [1m[35mContact Load (0.2ms)[0m  SELECT "contacts".* FROM "contacts"
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.1ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mKind Load (0.3ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kinds".* FROM "kinds" WHERE "kinds"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered contacts/index.html.erb within layouts/application (1060.4ms)
+Completed 200 OK in 1093ms (Views: 1087.9ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 18:51:42 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mContact Load (0.2ms)[0m  [1mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.2ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36mAdress Load (0.3ms)[0m  [1mSELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1[0m  [["contact_id", 1]]
+  Rendered contacts/_form.html.erb (26.9ms)
+  Rendered contacts/edit.html.erb within layouts/application (30.3ms)
+Completed 200 OK in 77ms (Views: 72.7ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 18:53:29 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mContact Load (0.2ms)[0m  SELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT "kinds".* FROM "kinds"[0m
+  [1m[35mAdress Load (0.2ms)[0m  SELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1  [["contact_id", 1]]
+  Rendered contacts/_form.html.erb (886.5ms)
+  Rendered contacts/edit.html.erb within layouts/application (889.2ms)
+Completed 200 OK in 929ms (Views: 916.6ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 18:54:56 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mContact Load (0.1ms)[0m  [1mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mKind Load (0.2ms)[0m  SELECT "kinds".* FROM "kinds"
+  [1m[36mAdress Load (0.2ms)[0m  [1mSELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1[0m  [["contact_id", 1]]
+  Rendered contacts/_form.html.erb (1145.6ms)
+  Rendered contacts/edit.html.erb within layouts/application (1147.6ms)
+Completed 200 OK in 1228ms (Views: 1214.9ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 18:57:04 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mContact Load (0.1ms)[0m  SELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mKind Load (0.2ms)[0m  [1mSELECT "kinds".* FROM "kinds"[0m
+  [1m[35mAdress Load (0.1ms)[0m  SELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1  [["contact_id", 1]]
+  Rendered contacts/_form.html.erb (8.5ms)
+  Rendered contacts/edit.html.erb within layouts/application (10.5ms)
+Completed 200 OK in 44ms (Views: 43.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2017-09-26 19:00:32 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mContact Load (0.2ms)[0m  SELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mKind Load (0.1ms)[0m  [1mSELECT "kinds".* FROM "kinds"[0m
+  [1m[35mAdress Load (0.2ms)[0m  SELECT  "adresses".* FROM "adresses" WHERE "adresses"."contact_id" = ? LIMIT 1  [["contact_id", 1]]
+  Rendered contacts/_form.html.erb (1030.4ms)
+  Rendered contacts/edit.html.erb within layouts/application (1036.4ms)
+Completed 200 OK in 1310ms (Views: 1276.8ms | ActiveRecord: 1.3ms)
