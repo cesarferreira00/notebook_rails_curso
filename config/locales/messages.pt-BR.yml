@@ -2,3 +2,6 @@
   messages:
     confirm: Tem certeza?
     listing: Listando
+    errors_msg:  não permitem que o contato seja salvo
+    errors: erros
+    error: erro

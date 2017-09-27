@@ -7,6 +7,10 @@ gem 'rails', '4.2.5'
 gem 'rails-i18n', '~> 4.0.0'
 # A library for generating fake data such as names, addresses, and phone numbers.
 gem 'faker'
+# ⚡ A Scope & Engine based, clean, powerful, customizable and sophisticated paginator for Ruby webapps https://github.com/amatsuda/kaminari/…
+gem 'kaminari'
+# Translations for the kaminari gem
+gem 'kaminari-i18n'
 # Dynamic nested forms using jQuery made easy; works with formtastic, simple_form or default forms http://github.com/nathanvda/cocoon
 gem "cocoon"
 # O Lero-lero Generator é uma ferramenta capaz de gerar frases que 'falam' muita coisa mas que não tem conteúdo algum.
