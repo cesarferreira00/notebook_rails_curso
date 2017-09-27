@@ -104,3 +104,12 @@ a {
 .basic-grey .button:hover {
     background: #CF7A7A
 }
+
+.basic-grey table {
+    text-align: center;
+    width: 100%;
+}
+
+.basic-grey table tr td.left {
+    text-align: left;
+}
