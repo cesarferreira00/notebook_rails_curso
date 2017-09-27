@@ -7,6 +7,8 @@ gem 'rails', '4.2.5'
 gem 'rails-i18n', '~> 4.0.0'
 # A library for generating fake data such as names, addresses, and phone numbers.
 gem 'faker'
+# Dynamic nested forms using jQuery made easy; works with formtastic, simple_form or default forms http://github.com/nathanvda/cocoon
+gem "cocoon"
 # O Lero-lero Generator é uma ferramenta capaz de gerar frases que 'falam' muita coisa mas que não tem conteúdo algum.
 gem 'lerolero_generator'
 # Use sqlite3 as the database for Active Record
@@ -41,6 +43,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  # Rails >= 3 pry initializer
+  gem 'pry-rails'
 end
 
 group :development do
