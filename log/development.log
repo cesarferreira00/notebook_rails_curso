@@ -12186,3 +12186,22 @@ Started GET "/phones" for ::1 at 2017-09-28 17:44:01 -0300
 Processing by PhonesController#index as JS
   Rendered phones/index.js.erb (0.3ms)
 Completed 200 OK in 13ms (Views: 12.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2017-09-28 18:25:01 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 756ms (Views: 746.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2017-09-28 18:25:02 -0300
+
+
+Started GET "/assets/notifyjs/dist/notify.self-580979233c906abe103d95ccdbfe97994e5a03d69946ab5b2f74dc3a667fde52.js?body=1" for ::1 at 2017-09-28 18:25:02 -0300
+
+
+Started GET "/phones" for ::1 at 2017-09-28 18:25:04 -0300
+Processing by PhonesController#index as JS
+  Rendered phones/index.js.erb (0.3ms)
+Completed 200 OK in 16ms (Views: 15.5ms | ActiveRecord: 0.0ms)
