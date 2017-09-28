@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
 
 
+gem 'bundler', '>= 1.8.4'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
+gem 'rails-assets-notifyjs', source: 'https://rails-assets.org'
 # Repository for collecting Locale data for Ruby on Rails I18n as well as other interesting, Rails related I18n stuff http://rails-i18n.org
 gem 'rails-i18n', '~> 4.0.0'
-# Bundler-like DSL + rake tasks for Bower on Rails
-gem "bower-rails", "~> 0.11.0"
 # A library for generating fake data such as names, addresses, and phone numbers.
 gem 'faker'
 # ⚡ A Scope & Engine based, clean, powerful, customizable and sophisticated paginator for Ruby webapps https://github.com/amatsuda/kaminari/…
