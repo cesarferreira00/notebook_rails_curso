@@ -1,6 +1,0 @@
-  [1m[36m (292.1ms)[0m  [1mCREATE TABLE "adresses" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "street" varchar, "city" varchar, "state" varchar, "contact_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
-  [1m[35m (0.2ms)[0m  select sqlite_version(*)
-  [1m[36m (268.2ms)[0m  [1mCREATE  INDEX "index_adresses_on_contact_id" ON "adresses" ("contact_id")[0m
-  [1m[35m (286.1ms)[0m  CREATE TABLE "contacts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "kind_id" integer, "rmk" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
-  [1m[36m (287.1ms)[0m  [1mCREATE  INDEX "index_contacts_on_kind_id" ON "contacts" ("kind_id")[0m
-  [1m[35m (321.2ms)[0m  CREATE TABLE "kinds" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
