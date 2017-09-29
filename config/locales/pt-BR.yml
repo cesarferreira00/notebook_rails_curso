@@ -1,2 +1,7 @@
 "pt-BR":
   hello: "Olá Mundo"
+  name: "Nome"
+  email: "E-mail"
+  kind: "Tipo de Contato"
+  rmk: "Obs."
+  kinds: "Tipos de Contato"

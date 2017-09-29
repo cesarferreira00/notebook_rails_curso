@@ -1,3 +1,4 @@
+<br>
 <%= form_for(@contact, html: { class: "basic-grey" }) do |f| %>
   <h1><%= t('titles.contacts') %></h1>
 
@@ -35,8 +36,8 @@
     <% end %> 
 
     <div class="field">
-      <%= f.label :phone, ">" %><br>
-      <%= link_to_add_association('[Adicionar Telefone]', f, :phones) %>
+      <%= f.label :phones, "<span class='glyphicon glyphicon-phone-alt' aria-hidden='true'></span>".html_safe %><br>
+      <%= link_to_add_association('Adicionar Telefone', f, :phones, class: "btn btn-default btn-sm btn-phone") %>
     </div>
   </div>  
 
@@ -46,8 +47,8 @@
     <%= f.text_area :rmk %>
   </div>
   <div class="actions">
-    <%= f.submit "Enviar", class: "button" %>
-    <%= link_to 'Back', contacts_path, class: "button" %>
+    <%= f.submit "#{t('buttons.save')}", class: "btn btn-primary" %>
+    <%= link_to "#{t('buttons.back')}", contacts_path, class: "btn btn-success" %>
   </div>
 
    <% if @contact.errors.any? %>

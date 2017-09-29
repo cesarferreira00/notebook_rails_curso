@@ -25,3 +25,5 @@
         contact_id: Contato
       phone:
         phone: Telefone
+      kind:
+        description: "Descrição"

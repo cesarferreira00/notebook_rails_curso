@@ -5,3 +5,6 @@
     errors_msg:  não permitem que o contato seja salvo
     errors: erros
     error: erro
+    created: Item criado com sucesso!
+    updated: Item atualizado com sucesso!
+    destroyed: Item excluido com sucesso!
